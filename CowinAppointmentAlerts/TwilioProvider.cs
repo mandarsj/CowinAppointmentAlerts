@@ -9,7 +9,7 @@ namespace CowinAppointmentAlerts
     public class TwilioProvider
     {
         private static readonly string sId = "AC488dbc541efe70ab117fa8e780e4303d";
-        private static readonly string authToken = "a895eac84b04317d199e65769b02720c";
+        private static readonly string authToken = "605e098005ce742a6d30dae145fc1946";
 
         public static void SendAppointmentSMS(string centers, string reciever, string vaccineNames, string pincode, string minAge,string doseNumber)
         {
@@ -17,7 +17,7 @@ namespace CowinAppointmentAlerts
             TwilioClient.Init(sId, authToken);
 
             MessageResource.Create(
-                  body: $"{vaccineNames} {doseNumber}  available at {pincode} at {centers} for {minAge}  .Book at https://www.cowin.gov.in/home",
+                  body: $"For {minAge} {vaccineNames} {doseNumber}  available at {pincode} at {centers}  .Book at https://www.cowin.gov.in/home",
                   from: fromNumber,
                   to: new Twilio.Types.PhoneNumber(reciever)
                );
