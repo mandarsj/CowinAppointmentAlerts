@@ -177,7 +177,7 @@ namespace CowinAppointmentAlerts
             //string connectionstring = "Data Source=LIN22004804\\SQLEXPRESS;Persist Security Info=False;Integrated Security=true;Initial Catalog=CowinNotifDb";
             var connection = new SqlConnection(connectionString);
 
-            string query = @"Insert into NotificationHistory(UserId,SentDate,pincode)values(@userId,Convert(date,GetDate()),@pincode)";
+            string query = @"Insert into NotificationHistory(UserId,SentDate,pincode)values(@userId,GetDate(),@pincode)";
 
             await connection.ExecuteAsync(query, usernotification);
 
@@ -186,7 +186,7 @@ namespace CowinAppointmentAlerts
         private static async Task<int> GetNotificationData(usernotification usernotification)
         {
             var connection = new SqlConnection(connectionString);
-            string query = @"select count('x') from NotificationHistory where UserId=@userid and pincode=@pincode";
+            string query = @"select count('x') from NotificationHistory where UserId=@userid and pincode=@pincode and Convert(date,SentDate)=Convert(date,GetDate())";
 
             int results = (int)await connection.ExecuteScalarAsync(query, usernotification);
 

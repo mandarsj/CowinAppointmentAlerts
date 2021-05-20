@@ -9,7 +9,7 @@ namespace CowinAppointmentAlerts
     public class TwilioProvider
     {
         private static readonly string sId = "AC488dbc541efe70ab117fa8e780e4303d";
-        private static readonly string authToken = "605e098005ce742a6d30dae145fc1946";
+        private static readonly string authToken = Environment.GetEnvironmentVariable("TwilioAuthToken"); //"605e098005ce742a6d30dae145fc1946";
 
         public static void SendAppointmentSMS(string centers, string reciever, string vaccineNames, string pincode, string minAge,string doseNumber)
         {
