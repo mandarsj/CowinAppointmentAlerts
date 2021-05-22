@@ -8,16 +8,18 @@ namespace CowinAppointmentAlerts
 {
     public class TwilioProvider
     {
-        private static readonly string sId = Environment.GetEnvironmentVariable("TwilioSid");
-        private static readonly string authToken = Environment.GetEnvironmentVariable("TwilioAuthToken");
+        private static readonly string sId =  Environment.GetEnvironmentVariable("twilioSid");
+        private static readonly string authToken =Environment.GetEnvironmentVariable("TwilioAuthToken");
+        private static readonly string phoneNumber = Environment.GetEnvironmentVariable("twilioPhoneNumber");
+
 
         public static void SendAppointmentSMS(string centers, string reciever, string vaccineNames, string pincode, string minAge,string doseNumber)
         {
-            var fromNumber = new Twilio.Types.PhoneNumber("+15122706530");
+            var fromNumber = new Twilio.Types.PhoneNumber(phoneNumber);
             TwilioClient.Init(sId, authToken);
 
             MessageResource.Create(
-                  body: $"For {minAge} {vaccineNames} {doseNumber}  available at {pincode} at {centers}  .Book at https://www.cowin.gov.in/home",
+                  body: $"For {minAge} {vaccineNames} {doseNumber}  available at {pincode} .Book at https://www.cowin.gov.in/home",
                   from: fromNumber,
                   to: new Twilio.Types.PhoneNumber(reciever)
                );
